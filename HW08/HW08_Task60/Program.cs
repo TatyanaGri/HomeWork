@@ -10,7 +10,6 @@
 26(1,0,1) 55(1,1,1)
 
 */
-
 int GetNumber (string message)
 {
     int result = 0;
@@ -30,11 +29,12 @@ int GetNumber (string message)
     return result;
 }
 
-int[,,] InitArray (int x, int y, int z)
+int [,,] InitArray (int x, int y, int z)
 {
-    int [,,] array = new int [x, y, z];
-
+    Dictionary<int, int> Dictionar = new Dictionary<int, int>();
     Random random = new Random();
+    
+    int [,,] array = new int [x, y, z];
 
     for (int i = 0; i < array.GetLength(0); i++)
     {
@@ -42,7 +42,11 @@ int[,,] InitArray (int x, int y, int z)
         {
             for (int k = 0; k < array.GetLength(2); k++)
             {
-                array[i, j, k] = random.Next(10, 100);    
+                while (Dictionar.ContainsKey(array[i, j, k]))
+                {
+                   array[i, j, k] = random.Next(2,20); 
+                }
+                Dictionar.Add(array[i, j, k], 1);
             }
         }
     }
@@ -73,5 +77,3 @@ Console.WriteLine();
 int[,,] array = InitArray (x, y, z);
 PrintArray(array);
 Console.WriteLine();
-
-проверка на уникальность
